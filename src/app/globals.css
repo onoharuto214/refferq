@@ -33,7 +33,6 @@
   --color-chart-3: hsl(var(--chart-3));
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
-  --radius-DEFAULT: var(--radius);
 }
 
 @layer base {
@@ -118,23 +117,46 @@
 /* Premium UI Utilities */
 @layer utilities {
   .glass {
-    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
   }
 
   .dark .glass {
-    @apply bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   }
 
-  /* AFTER */
   .glass-card {
-    @apply bg-white/40 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_0_rgba(31_38_135_/_0.07)] rounded-2xl transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(31_38_135_/_0.15)] hover:bg-white/50;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    border-radius: 1rem;
+    transition: all 300ms;
+  }
+
+  .glass-card:hover {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    background: rgba(255, 255, 255, 0.5);
   }
 
   .dark .glass-card {
-    @apply bg-neutral-900/40 backdrop-blur-xl border border-white/5 shadow-[0_8px_32px_0_rgba(0_0_0_/_0.37)] rounded-2xl transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(0_0_0_/_0.5)] hover:bg-neutral-900/60;
+    background: rgba(23, 23, 23, 0.4);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border-radius: 1rem;
+    transition: all 300ms;
   }
 
-
+  .dark .glass-card:hover {
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    background: rgba(23, 23, 23, 0.6);
+  }
 
   .glass-morphism {
     background: rgba(255, 255, 255, 0.25);
