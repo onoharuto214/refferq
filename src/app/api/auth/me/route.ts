@@ -4,8 +4,11 @@ import { prisma } from '@/lib/prisma';
 export async function GET(request: NextRequest) {
   try {
     const userId = request.headers.get('x-user-id');
+    const allHeaders = Object.fromEntries(request.headers.entries());
+    console.log('[DEBUG] /api/auth/me Headers:', allHeaders);
 
     if (!userId) {
+      console.log('[DEBUG] /api/auth/me User ID not found in headers');
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
