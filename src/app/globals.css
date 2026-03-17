@@ -125,13 +125,16 @@
     @apply bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl;
   }
 
+  /* AFTER */
   .glass-card {
-    @apply bg-white/40 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_0_rgba(31, 38, 135, 0.07)] rounded-2xl transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(31, 38, 135, 0.15)] hover:bg-white/50;
+    @apply bg-white/40 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_0_rgba(31_38_135_/_0.07)] rounded-2xl transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(31_38_135_/_0.15)] hover:bg-white/50;
   }
 
   .dark .glass-card {
-    @apply bg-neutral-900/40 backdrop-blur-xl border border-white/5 shadow-[0_8px_32px_0_rgba(0, 0, 0, 0.37)] rounded-2xl transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(0, 0, 0, 0.5)] hover:bg-neutral-900/60;
+    @apply bg-neutral-900/40 backdrop-blur-xl border border-white/5 shadow-[0_8px_32px_0_rgba(0_0_0_/_0.37)] rounded-2xl transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(0_0_0_/_0.5)] hover:bg-neutral-900/60;
   }
+
+
 
   .glass-morphism {
     background: rgba(255, 255, 255, 0.25);
