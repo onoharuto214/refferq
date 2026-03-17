@@ -439,7 +439,7 @@ Built with ❤️ using:
 </p>
 
 <p align="center">
-  <sub>© 2025 Refferq. All rights reserved.</sub>
+  <sub>© 2026 Refferq. All rights reserved.</sub>
 </p>
 <p align="center">
  **⭐ Found this useful? Give us a star to support the project!**
