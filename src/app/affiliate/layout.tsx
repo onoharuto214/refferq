@@ -81,11 +81,12 @@ function AffiliateSidebar({ brand }: { brand: BrandSettings }) {
         <SidebarMenu>
           <SidebarMenuItem>
             <div className="flex items-center gap-3 px-3 py-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d7e54f]">
-                <img src="/images/secora_logo.png" alt="SecOra" className="h-7 w-7 object-contain" />
-              </div>
+              <img 
+                src="/images/secora_logo.svg" 
+                alt="SecOra" 
+                className="h-8 w-auto object-contain group-data-[collapsible=icon]:h-6"
+              />
               <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-                <span className="text-base font-bold text-white tracking-tight">SecOra</span>
                 <span className="text-xs text-[#d7e54f] font-medium">Affiliate Portal</span>
               </div>
             </div>
@@ -258,8 +259,8 @@ export default function AffiliateLayout({ children }: { children: React.ReactNod
       <AffiliateSidebar brand={brand} />
       <SidebarInset>
         <header className="flex h-14 shrink-0 items-center gap-2 border-b border-[#e8f5f0] bg-white px-4">
-          <SidebarTrigger />
-          <Separator orientation="vertical" className="mr-2 h-4" />
+          <SidebarTrigger className="text-[#0f3f3a] hover:bg-[#f0f5f3] hover:text-[#185c55]" />
+          <Separator orientation="vertical" className="mr-2 h-4 bg-[#e8f5f0]" />
           <div className="flex flex-1 items-center justify-between">
             <div>
               <p className="text-sm text-muted-foreground">
@@ -267,8 +268,8 @@ export default function AffiliateLayout({ children }: { children: React.ReactNod
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-4 w-4" />
+              <Button variant="ghost" size="icon" className="relative hover:bg-[#f0f5f3]">
+                <Bell className="h-4 w-4 text-[#0f3f3a]" />
               </Button>
             </div>
           </div>

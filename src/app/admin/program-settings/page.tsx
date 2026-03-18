@@ -52,7 +52,7 @@ import {
   Pencil,
   Trash2,
   Percent,
-  IndianRupee,
+  DollarSign,
   CheckCircle2,
   Globe,
   Code2,
@@ -322,7 +322,7 @@ export default function ProgramSettingsPage() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="INR">INR (₹)</SelectItem>
+                  <SelectItem value="INR">INR ($)</SelectItem>
                   <SelectItem value="USD">USD ($)</SelectItem>
                   <SelectItem value="EUR">EUR (€)</SelectItem>
                   <SelectItem value="GBP">GBP (£)</SelectItem>
@@ -436,7 +436,7 @@ export default function ProgramSettingsPage() {
                         {ruleForm.type === 'PERCENTAGE' ? (
                           <Percent className="absolute right-3 top-2.5 h-4 w-4 text-muted-foreground" />
                         ) : (
-                          <IndianRupee className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                          <DollarSign className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                         )}
                         <Input
                           type="number"
@@ -493,7 +493,7 @@ export default function ProgramSettingsPage() {
                       <Badge variant="outline">{rule.type}</Badge>
                     </TableCell>
                     <TableCell>
-                      {rule.type === 'PERCENTAGE' ? `${rule.value}%` : `₹${rule.value}`}
+                      {rule.type === 'PERCENTAGE' ? `${rule.value}%` : `$${rule.value}`}
                     </TableCell>
                     <TableCell>
                       {rule.isDefault && <Badge variant="default">Default</Badge>}

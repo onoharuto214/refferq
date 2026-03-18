@@ -156,7 +156,7 @@ export default function ProgramsPage() {
 
   const formatCurrency = (cents: number, currency: string = 'INR') => {
     const symbol = currency === 'INR' ? '\u20B9' : currency === 'USD' ? '$' : currency === 'EUR' ? '\u20AC' : currency;
-    return `${symbol}${(cents / 100).toLocaleString('en-IN', { minimumFractionDigits: 0 })}`;
+    return `${symbol}${(cents / 100).toLocaleString('en-US', { minimumFractionDigits: 0 })}`;
   };
 
   const stats = {
