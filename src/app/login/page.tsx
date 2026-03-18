@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -21,7 +22,7 @@ import {
   InputOTPSeparator,
 } from '@/components/ui/input-otp';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Target, Mail, ShieldCheck, ArrowLeft, Loader2 } from 'lucide-react';
+import { Mail, ShieldCheck, ArrowLeft, Loader2 } from 'lucide-react';
 
 type Step = 'email' | 'otp';
 
@@ -122,47 +123,58 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background p-4">
-      <div className="w-full max-w-md space-y-6">
+    <div className="min-h-screen flex items-center justify-center bg-[#0f3f3a] p-4 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: 'linear-gradient(#d7e54f 1px, transparent 1px), linear-gradient(90deg, #d7e54f 1px, transparent 1px)',
+        backgroundSize: '50px 50px'
+      }} />
+      
+      <div className="w-full max-w-md space-y-6 relative z-10">
         {/* Logo & Branding */}
-        <div className="text-center space-y-2">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary shadow-lg shadow-primary/25">
-            <Target className="h-7 w-7 text-primary-foreground" />
+        <div className="text-center space-y-3">
+          <div className="flex items-center justify-center w-full">
+            <Image 
+              src="/images/secora_logo.svg" 
+              alt="SecOra" 
+              width={332} 
+              height={100}
+              priority
+            />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">Refferq</h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-white/60">
             Affiliate Marketing Platform
           </p>
         </div>
 
         {/* Login Card */}
-        <Card className="border-0 shadow-xl shadow-black/5">
+        <Card className="border-[#185c55] bg-white/95 backdrop-blur shadow-2xl">
           {step === 'email' ? (
             <>
               <CardHeader className="text-center pb-4">
-                <CardTitle className="text-xl">Welcome back</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-2xl text-[#0f3f3a]">Welcome back</CardTitle>
+                <CardDescription className="text-[#0f3f3a]/60">
                   Enter your email to sign in to your account
                 </CardDescription>
               </CardHeader>
               <form onSubmit={handleSendOTP}>
                 <CardContent className="space-y-4">
                   {error && (
-                    <Alert variant="destructive">
+                    <Alert variant="destructive" className="border-red-200 bg-red-50">
                       <AlertDescription>{error}</AlertDescription>
                     </Alert>
                   )}
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email address</Label>
+                    <Label htmlFor="email" className="text-[#0f3f3a] font-medium">Email address</Label>
                     <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#185c55]" />
                       <Input
                         id="email"
                         type="email"
                         placeholder="you@example.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="pl-10"
+                        className="pl-10 border-[#e8f5f0] focus:border-[#185c55] focus:ring-[#185c55]"
                         required
                         autoFocus
                         autoComplete="email"
@@ -171,7 +183,12 @@ export default function LoginPage() {
                   </div>
                 </CardContent>
                 <CardFooter className="flex-col gap-4">
-                  <Button type="submit" className="w-full" size="lg" disabled={loading || !email}>
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-[#d7e54f] text-[#0f3f3a] hover:bg-[#c9e53a] font-semibold" 
+                    size="lg" 
+                    disabled={loading || !email}
+                  >
                     {loading ? (
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     ) : (
@@ -185,24 +202,24 @@ export default function LoginPage() {
           ) : (
             <>
               <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                  <ShieldCheck className="h-6 w-6 text-primary" />
+                <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-[#d7e54f]/20">
+                  <ShieldCheck className="h-6 w-6 text-[#185c55]" />
                 </div>
-                <CardTitle className="text-xl">Check your email</CardTitle>
-                <CardDescription>
-                  We sent a 6-digit code to <span className="font-medium text-foreground">{email}</span>
+                <CardTitle className="text-2xl text-[#0f3f3a]">Check your email</CardTitle>
+                <CardDescription className="text-[#0f3f3a]/60">
+                  We sent a 6-digit code to <span className="font-medium text-[#0f3f3a]">{email}</span>
                 </CardDescription>
               </CardHeader>
               <form onSubmit={handleVerifyOTP}>
                 <CardContent className="space-y-4">
                   {error && (
-                    <Alert variant="destructive">
+                    <Alert variant="destructive" className="border-red-200 bg-red-50">
                       <AlertDescription>{error}</AlertDescription>
                     </Alert>
                   )}
                   {message && (
-                    <Alert>
-                      <AlertDescription>{message}</AlertDescription>
+                    <Alert className="border-[#d7e54f] bg-[#d7e54f]/10">
+                      <AlertDescription className="text-[#0f3f3a]">{message}</AlertDescription>
                     </Alert>
                   )}
                   <div className="flex justify-center">
@@ -212,15 +229,15 @@ export default function LoginPage() {
                       onChange={(value) => setOtp(value)}
                     >
                       <InputOTPGroup>
-                        <InputOTPSlot index={0} />
-                        <InputOTPSlot index={1} />
-                        <InputOTPSlot index={2} />
+                        <InputOTPSlot index={0} className="border-[#e8f5f0]" />
+                        <InputOTPSlot index={1} className="border-[#e8f5f0]" />
+                        <InputOTPSlot index={2} className="border-[#e8f5f0]" />
                       </InputOTPGroup>
                       <InputOTPSeparator />
                       <InputOTPGroup>
-                        <InputOTPSlot index={3} />
-                        <InputOTPSlot index={4} />
-                        <InputOTPSlot index={5} />
+                        <InputOTPSlot index={3} className="border-[#e8f5f0]" />
+                        <InputOTPSlot index={4} className="border-[#e8f5f0]" />
+                        <InputOTPSlot index={5} className="border-[#e8f5f0]" />
                       </InputOTPGroup>
                     </InputOTP>
                   </div>
@@ -228,7 +245,7 @@ export default function LoginPage() {
                 <CardFooter className="flex-col gap-3">
                   <Button
                     type="submit"
-                    className="w-full"
+                    className="w-full bg-[#d7e54f] text-[#0f3f3a] hover:bg-[#c9e53a] font-semibold"
                     size="lg"
                     disabled={loading || otp.length < 6}
                   >
@@ -244,6 +261,7 @@ export default function LoginPage() {
                       type="button"
                       variant="ghost"
                       size="sm"
+                      className="text-[#185c55] hover:text-[#0f3f3a] hover:bg-[#f0f5f3]"
                       onClick={() => {
                         setStep('email');
                         setOtp('');
@@ -258,6 +276,7 @@ export default function LoginPage() {
                       type="button"
                       variant="ghost"
                       size="sm"
+                      className="text-[#185c55] hover:text-[#0f3f3a] hover:bg-[#f0f5f3]"
                       onClick={handleResendOTP}
                       disabled={loading}
                     >
@@ -271,9 +290,9 @@ export default function LoginPage() {
         </Card>
 
         {/* Footer */}
-        <p className="text-center text-sm text-muted-foreground">
+        <p className="text-center text-sm text-white/70">
           Don&apos;t have an account?{' '}
-          <Link href="/register" className="font-medium text-primary hover:underline">
+          <Link href="/register" className="font-medium text-[#d7e54f] hover:text-[#c9e53a] hover:underline">
             Sign up
           </Link>
         </p>

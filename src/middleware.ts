@@ -12,8 +12,10 @@ export async function middleware(request: NextRequest) {
     // 1. Define protected routes
     const isAdminRoute = pathname.startsWith('/api/admin') || pathname.startsWith('/admin');
     const isAffiliateRoute = pathname.startsWith('/api/affiliate') || pathname.startsWith('/affiliate');
+    const isAuthMeRoute = pathname === '/api/auth/me';
 
-    if (!isAdminRoute && !isAffiliateRoute) {
+    // Skip middleware for non-protected routes
+    if (!isAdminRoute && !isAffiliateRoute && !isAuthMeRoute) {
         return NextResponse.next();
     }
 
@@ -37,28 +39,30 @@ export async function middleware(request: NextRequest) {
         const { payload } = await jwtVerify(token, JWT_SECRET);
         const userRole = payload.role as string;
 
-        // 4. Role-based access control
-        if (isAdminRoute && userRole !== 'ADMIN') {
-            if (pathname.startsWith('/api/')) {
-                return NextResponse.json(
-                    { error: 'Forbidden: Admin access required' },
-                    { status: 403 }
-                );
+        // 4. Role-based access control (skip for /api/auth/me)
+        if (!isAuthMeRoute) {
+            if (isAdminRoute && userRole !== 'ADMIN') {
+                if (pathname.startsWith('/api/')) {
+                    return NextResponse.json(
+                        { error: 'Forbidden: Admin access required' },
+                        { status: 403 }
+                    );
+                }
+                return NextResponse.redirect(new URL('/login', request.url));
             }
-            return NextResponse.redirect(new URL('/login', request.url));
+
+            if (isAffiliateRoute && userRole !== 'AFFILIATE' && userRole !== 'ADMIN') {
+                if (pathname.startsWith('/api/')) {
+                    return NextResponse.json(
+                        { error: 'Forbidden: Affiliate access required' },
+                        { status: 403 }
+                    );
+                }
+                return NextResponse.redirect(new URL('/login', request.url));
+            }
         }
 
-        if (isAffiliateRoute && userRole !== 'AFFILIATE' && userRole !== 'ADMIN') {
-            if (pathname.startsWith('/api/')) {
-                return NextResponse.json(
-                    { error: 'Forbidden: Affiliate access required' },
-                    { status: 403 }
-                );
-            }
-            return NextResponse.redirect(new URL('/login', request.url));
-        }
-
-        // 5. Inject user info into headers for API usage (optional but helpful)
+        // 5. Inject user info into headers for API usage
         const requestHeaders = new Headers(request.headers);
         requestHeaders.set('x-user-id', payload.userId as string);
         requestHeaders.set('x-user-role', userRole);

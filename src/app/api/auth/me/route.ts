@@ -30,12 +30,21 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // Check if user account is active
+    if (user.status !== 'ACTIVE') {
+      return NextResponse.json(
+        { error: 'Account is not active. Please contact support for assistance.' },
+        { status: 403 }
+      );
+    }
+
     return NextResponse.json({
       user: {
         id: user.id,
         email: user.email,
         name: user.name,
         role: user.role,
+        status: user.status,
         hasAffiliate: !!user.affiliate,
         profilePicture: user.profilePicture,
       }

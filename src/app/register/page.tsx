@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -21,7 +22,7 @@ import {
   InputOTPSeparator,
 } from '@/components/ui/input-otp';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Target, User, Mail, ShieldCheck, ArrowLeft, Loader2, CheckCircle2 } from 'lucide-react';
+import { User, Mail, ShieldCheck, ArrowLeft, Loader2, CheckCircle2 } from 'lucide-react';
 
 type Step = 'details' | 'otp' | 'success';
 
@@ -145,47 +146,58 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background p-4">
-      <div className="w-full max-w-md space-y-6">
-        {/* Logo */}
-        <div className="text-center space-y-2">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary shadow-lg shadow-primary/25">
-            <Target className="h-7 w-7 text-primary-foreground" />
+    <div className="min-h-screen flex items-center justify-center bg-[#0f3f3a] p-4 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: 'linear-gradient(#d7e54f 1px, transparent 1px), linear-gradient(90deg, #d7e54f 1px, transparent 1px)',
+        backgroundSize: '50px 50px'
+      }} />
+      
+      <div className="w-full max-w-md space-y-6 relative z-10">
+        {/* Logo & Branding */}
+        <div className="text-center space-y-3">
+          <div className="flex items-center justify-center w-full">
+            <Image 
+              src="/images/secora_logo.svg" 
+              alt="SecOra" 
+              width={332} 
+              height={100}
+              priority
+            />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">Refferq</h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-white/60">
             Affiliate Marketing Platform
           </p>
         </div>
 
-        {/* Card */}
-        <Card className="border-0 shadow-xl shadow-black/5">
+        {/* Register Card */}
+        <Card className="border-[#185c55] bg-white/95 backdrop-blur shadow-2xl">
           {step === 'details' && (
             <>
               <CardHeader className="text-center pb-4">
-                <CardTitle className="text-xl">Create your account</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-2xl text-[#0f3f3a]">Create your account</CardTitle>
+                <CardDescription className="text-[#0f3f3a]/60">
                   Join as an affiliate partner and start earning
                 </CardDescription>
               </CardHeader>
               <form onSubmit={handleRegister}>
                 <CardContent className="space-y-4">
                   {error && (
-                    <Alert variant="destructive">
+                    <Alert variant="destructive" className="border-red-200 bg-red-50">
                       <AlertDescription>{error}</AlertDescription>
                     </Alert>
                   )}
                   <div className="space-y-2">
-                    <Label htmlFor="name">Full Name</Label>
+                    <Label htmlFor="name" className="text-[#0f3f3a] font-medium">Full Name</Label>
                     <div className="relative">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#185c55]" />
                       <Input
                         id="name"
                         type="text"
                         placeholder="Your name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="pl-10"
+                        className="pl-10 border-[#e8f5f0] focus:border-[#185c55] focus:ring-[#185c55]"
                         required
                         autoFocus
                         autoComplete="name"
@@ -193,16 +205,16 @@ export default function RegisterPage() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email address</Label>
+                    <Label htmlFor="email" className="text-[#0f3f3a] font-medium">Email address</Label>
                     <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#185c55]" />
                       <Input
                         id="email"
                         type="email"
                         placeholder="you@example.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="pl-10"
+                        className="pl-10 border-[#e8f5f0] focus:border-[#185c55] focus:ring-[#185c55]"
                         required
                         autoComplete="email"
                       />
@@ -212,13 +224,15 @@ export default function RegisterPage() {
                 <CardFooter className="flex-col gap-4">
                   <Button
                     type="submit"
-                    className="w-full"
+                    className="w-full bg-[#d7e54f] text-[#0f3f3a] hover:bg-[#c9e53a] font-semibold"
                     size="lg"
                     disabled={loading || !name || !email}
                   >
                     {loading ? (
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    ) : null}
+                    ) : (
+                      <User className="mr-2 h-4 w-4" />
+                    )}
                     {loading ? 'Creating account...' : 'Create Account'}
                   </Button>
                 </CardFooter>
@@ -229,24 +243,24 @@ export default function RegisterPage() {
           {step === 'otp' && (
             <>
               <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                  <ShieldCheck className="h-6 w-6 text-primary" />
+                <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-[#d7e54f]/20">
+                  <ShieldCheck className="h-6 w-6 text-[#185c55]" />
                 </div>
-                <CardTitle className="text-xl">Verify your email</CardTitle>
-                <CardDescription>
-                  Enter the 6-digit code sent to <span className="font-medium text-foreground">{email}</span>
+                <CardTitle className="text-2xl text-[#0f3f3a]">Verify your email</CardTitle>
+                <CardDescription className="text-[#0f3f3a]/60">
+                  We sent a 6-digit code to <span className="font-medium text-[#0f3f3a]">{email}</span>
                 </CardDescription>
               </CardHeader>
               <form onSubmit={handleVerifyOTP}>
                 <CardContent className="space-y-4">
                   {error && (
-                    <Alert variant="destructive">
+                    <Alert variant="destructive" className="border-red-200 bg-red-50">
                       <AlertDescription>{error}</AlertDescription>
                     </Alert>
                   )}
                   {message && (
-                    <Alert>
-                      <AlertDescription>{message}</AlertDescription>
+                    <Alert className="border-[#d7e54f] bg-[#d7e54f]/10">
+                      <AlertDescription className="text-[#0f3f3a]">{message}</AlertDescription>
                     </Alert>
                   )}
                   <div className="flex justify-center">
@@ -256,15 +270,15 @@ export default function RegisterPage() {
                       onChange={(value) => setOtp(value)}
                     >
                       <InputOTPGroup>
-                        <InputOTPSlot index={0} />
-                        <InputOTPSlot index={1} />
-                        <InputOTPSlot index={2} />
+                        <InputOTPSlot index={0} className="border-[#e8f5f0]" />
+                        <InputOTPSlot index={1} className="border-[#e8f5f0]" />
+                        <InputOTPSlot index={2} className="border-[#e8f5f0]" />
                       </InputOTPGroup>
                       <InputOTPSeparator />
                       <InputOTPGroup>
-                        <InputOTPSlot index={3} />
-                        <InputOTPSlot index={4} />
-                        <InputOTPSlot index={5} />
+                        <InputOTPSlot index={3} className="border-[#e8f5f0]" />
+                        <InputOTPSlot index={4} className="border-[#e8f5f0]" />
+                        <InputOTPSlot index={5} className="border-[#e8f5f0]" />
                       </InputOTPGroup>
                     </InputOTP>
                   </div>
@@ -272,7 +286,7 @@ export default function RegisterPage() {
                 <CardFooter className="flex-col gap-3">
                   <Button
                     type="submit"
-                    className="w-full"
+                    className="w-full bg-[#d7e54f] text-[#0f3f3a] hover:bg-[#c9e53a] font-semibold"
                     size="lg"
                     disabled={loading || otp.length < 6}
                   >
@@ -288,6 +302,7 @@ export default function RegisterPage() {
                       type="button"
                       variant="ghost"
                       size="sm"
+                      className="text-[#185c55] hover:text-[#0f3f3a] hover:bg-[#f0f5f3]"
                       onClick={() => {
                         setStep('details');
                         setOtp('');
@@ -302,6 +317,7 @@ export default function RegisterPage() {
                       type="button"
                       variant="ghost"
                       size="sm"
+                      className="text-[#185c55] hover:text-[#0f3f3a] hover:bg-[#f0f5f3]"
                       onClick={handleResendOTP}
                       disabled={loading}
                     >
@@ -316,17 +332,17 @@ export default function RegisterPage() {
           {step === 'success' && (
             <CardContent className="py-12">
               <div className="text-center space-y-4">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
-                  <CheckCircle2 className="h-8 w-8 text-emerald-600" />
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#d7e54f]/20">
+                  <CheckCircle2 className="h-8 w-8 text-[#185c55]" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold">Welcome aboard, {name}!</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <h3 className="text-lg font-semibold text-[#0f3f3a]">Welcome aboard, {name}!</h3>
+                  <p className="text-sm text-[#0f3f3a]/60 mt-1">
                     Your account has been created. Redirecting to your dashboard...
                   </p>
                 </div>
                 <div className="flex justify-center">
-                  <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+                  <Loader2 className="h-5 w-5 animate-spin text-[#185c55]" />
                 </div>
               </div>
             </CardContent>
@@ -335,9 +351,9 @@ export default function RegisterPage() {
 
         {/* Footer */}
         {step !== 'success' && (
-          <p className="text-center text-sm text-muted-foreground">
+          <p className="text-center text-sm text-white/70">
             Already have an account?{' '}
-            <Link href="/login" className="font-medium text-primary hover:underline">
+            <Link href="/login" className="font-medium text-[#d7e54f] hover:text-[#c9e53a] hover:underline">
               Sign in
             </Link>
           </p>

@@ -183,6 +183,14 @@ export class OTPService {
         };
       }
 
+      // Check user status before allowing login
+      if (user.status !== 'ACTIVE') {
+        return {
+          success: false,
+          message: 'Your account is not active. Please contact support for assistance.'
+        };
+      }
+
       return {
         success: true,
         user,
