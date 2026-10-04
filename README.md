@@ -382,22 +382,6 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 4. Run tests: `npm test`
 5. Submit a pull request
 
----
-
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](./LICENSE) file for details.
-
----
-
-## 👨‍💻 Author
-
-**Developed by: Refferq Team**
-
-- GitHub: [@refferq](https://github.com/refferq)
-- Website: [https://refferq.com](https://refferq.com)
-
----
 
 ## 🌟 Show Your Support
 
@@ -416,34 +400,3 @@ If you find this project useful, please consider:
 - **Issues**: [GitHub Issues](https://github.com/yourusername/refferq/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/yourusername/refferq/discussions)
 
----
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=refferq/refferq&type=date&legend=top-left)](https://www.star-history.com/#refferq/refferq&type=date&legend=top-left)
-
-## 🙏 Acknowledgments
-
-Built with ❤️ using:
-- [Next.js](https://nextjs.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Recharts](https://recharts.org)
-
----
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I3I31MM8N2)
-
-
-<p align="center">
-  Made with ❤️ by the <strong>Refferq Team</strong>
-</p>
-
-<p align="center">
-  <sub>© 2026 Refferq. All rights reserved.</sub>
-</p>
-<p align="center">
- **⭐ Found this useful? Give us a star to support the project!**
-
-  [![Buy Me A Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&slug=daniavila&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://buymeacoffee.com/refferq)
- 
-# refferq
